@@ -2,82 +2,49 @@
 
 namespace Turkishjoe\TelegramEngine\Kernel;
 
-use App\Models\Telegram\UpdateInterface;
-use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequest;
+use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequestBuilder;
 use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequestRunner;
 use Turkishjoe\TelegramEngine\Kernel\Route\RouteResolver;
 use Turkishjoe\TelegramEngine\Kernel\Updates\UpdateObserverInterface;
 
 class TelegramEntryPoint
 {
-    /**
-     * @var UserManagerInterface $userManager
-     */
-    private UserManagerInterface $userManager;
-
-    /**
-     * @var UpdateObserverInterface $updateObserverInterface
-     */
     private UpdateObserverInterface $updateObserverInterface;
-
-    /**
-     * @var TelegramRequestRunner $telegramRequestRunner
-     */
-    private $telegramRequestRunner;
-
-    /**
-     * @var RouteResolver
-     */
-    private $routeResolver;
-
-    /**
-     * @var Logger $logger
-     */
-    private $logger;
+    private TelegramRequestRunner $telegramRequestRunner;
+    private TelegramRequestBuilder $telegramRequestBuilder;
+    private RouteResolver $routeResolver;
 
     public function __construct(
-        UserManagerInterface $userManager,
-        RouteResolver $routeResolver,
         TelegramRequestRunner $telegramRequestRunner,
-        UpdateObserverInterface $updateObserverInterface
-    )
-    {
-        $this->userManager = $userManager;
-        $this->routeResolver = $routeResolver;
+        TelegramRequestBuilder $telegramRequestBuilder,
+        UpdateObserverInterface $updateObserverInterface,
+        RouteResolver $routeResolver
+    ) {
         $this->telegramRequestRunner = $telegramRequestRunner;
         $this->updateObserverInterface = $updateObserverInterface;
+        $this->telegramRequestBuilder = $telegramRequestBuilder;
+        $this->routeResolver = $routeResolver;
     }
 
-    public function handler($data, BotMetadata $botMetadata){
+    public function handler(array $data, BotMetadata $botMetadata)
+    {
         $update = $this->updateObserverInterface->initUpdate($data);
-        if(empty($update)){
+        if (empty($update)) {
             return [];
         }
 
         try {
-            $telegramRequest = new TelegramRequest();
-            $data = empty($data['message']) ? $data['callback_query'] : $data;
-            $user = $this->userManager->findOrCreate($data['message']['chat'], $botMetadata->getUserClass());
+            $telegramRequest = $this->telegramRequestBuilder->build($data, $botMetadata);
 
-            if (!empty($data['data'])) {
-               $telegramRequest
-                    ->setCallbackData(json_decode($data['data'], true) ?? []);
-            }
+            $result = $this->telegramRequestRunner->call(
+                $telegramRequest,
+                $this->routeResolver->resolve($telegramRequest),
+                []
+            );
 
-            $text = $data['data']['action'] ?? $data['message']['text'] ?? '/start';
-
-            $telegramRequest->setData($data)
-                ->setUser($user)
-                ->setCurrentActionText($text)
-                ->setBot($botMetadata)
-                ->setCallbackData($data['data'] ?? []);
-
-            $route = $this->routeResolver->resolve($telegramRequest);
-
-            $result = $this->telegramRequestRunner->call($telegramRequest, $route, []);
             $this->updateObserverInterface->markUpdateAsProcessed($update);
-        }catch (\Throwable $exception){
-            if(!is_null($update)){
+        } catch (\Throwable $exception) {
+            if (!is_null($update)) {
                 $this->updateObserverInterface->markUpdateAsFailed($update);
             }
 

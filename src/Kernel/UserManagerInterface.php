@@ -2,9 +2,9 @@
 
 namespace Turkishjoe\TelegramEngine\Kernel;
 
-use App\Models\Telegram\Telegram\TelegramUserInterface;
+use Turkishjoe\TelegramEngine\Model\TelegramUserInterface;
 
 interface UserManagerInterface
 {
-    public function findOrCreate($telegramChatData, $class): TelegramUserInterface;
+    public function get($telegramChatData, $class): TelegramUserInterface;
 }

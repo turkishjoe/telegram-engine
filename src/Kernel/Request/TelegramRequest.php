@@ -15,11 +15,17 @@ class TelegramRequest
         'photo'=>TelegramMessageType::PHOTO_TYPE,
     ];
 
-    private array $callbackData;
-    private string $currentActionText;
+    private ?array $callbackData;
     private TelegramUserInterface $user;
-    private array $data;
-    private BotMetadata $bot;
+    private array $messageData;
+
+    public function __construct(
+        TelegramUserInterface $user,
+        array $messageData,
+        ?array $callbackData
+    ){
+
+    }
 
     public function getCallbackData(): array
     {
@@ -91,23 +97,6 @@ class TelegramRequest
     public function setBot(BotMetadata $bot)
     {
         $this->bot = $bot;
-
-        return $this;
-    }
-
-    public function getCurrentActionText(): string
-    {
-        return $this->currentActionText;
-    }
-
-    /**
-     * @param string $currentActionText
-     *
-     * @return $this
-     */
-    public function setCurrentActionText(string $currentActionText): self
-    {
-        $this->currentActionText = $currentActionText;
 
         return $this;
     }

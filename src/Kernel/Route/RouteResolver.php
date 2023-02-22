@@ -9,12 +9,7 @@ use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequest;
 
 class RouteResolver
 {
-    /**
-     * @param TelegramRequest $telegramRequest
-     * @param string $defaultAction
-     * @return Route
-     */
-    public function resolve(TelegramRequest $telegramRequest, string $defaultAction = '/start'){
+    public function resolve(TelegramRequest $telegramRequest, string $defaultAction = '/start'): Route{
         $botMetadata = $telegramRequest->getBot();
         $telegramData = $telegramRequest->getData();
         $state = $telegramRequest->getUser()->getStateData()['action'] ?? null;
