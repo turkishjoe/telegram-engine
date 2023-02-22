@@ -1,0 +1,17 @@
+{
+    "name": "turkishjoe/telegram-engine",
+    "autoload": {
+        "psr-4": {
+            "Turkishjoe\\TelegramEngine\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Turkish Joe"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "psr/container": "^2.0"
+    }
+}
