@@ -2,34 +2,23 @@
 
 namespace Turkishjoe\TelegramEngine\Kernel;
 
-use TelegramBot\Api\BotApi;
-
 class BotMetadata
 {
-    /**
-     * @var BotApi
-     */
     private $botService;
+    private string $userClass;
+    private string $botAlias;
+    private array $middleware = [];
+    private array $routes = [];
 
-    /**
-     * @var string
-     */
-    private $userClass;
+    public function __construct(
+        $userClass,
+        $botAlias,
+        $botService,
+        $routes = [],
+        $middleware = []
+    ){
 
-    /**
-     * @var string
-     */
-    private $botAlias;
-
-    /**
-     * @var array
-     */
-    private $middleware = [];
-
-    /**
-     * @var array
-     */
-    private $routes = [];
+    }
 
     /**
      * @deprecated
@@ -41,17 +30,6 @@ class BotMetadata
     }
 
     /**
-     * @deprecated
-     * @param BotApi $botService
-     * @return $this
-     */
-    public function setBotService($botService)
-    {
-        $this->botService = $botService;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getUserClass()
@@ -59,15 +37,6 @@ class BotMetadata
         return $this->userClass;
     }
 
-    /**
-     * @param string $userClass
-     * @return $this
-     */
-    public function setUserClass($userClass)
-    {
-        $this->userClass = $userClass;
-        return $this;
-    }
 
     /**
      * @return string
@@ -77,15 +46,6 @@ class BotMetadata
         return $this->botAlias;
     }
 
-    /**
-     * @param string $botAlias
-     * @return $this
-     */
-    public function setBotAlias($botAlias)
-    {
-        $this->botAlias = $botAlias;
-        return $this;
-    }
 
     /**
      * @return array
@@ -96,30 +56,10 @@ class BotMetadata
     }
 
     /**
-     * @param array $middleware
-     * @return $this
-     */
-    public function setMiddleware($middleware)
-    {
-        $this->middleware = $middleware;
-        return $this;
-    }
-
-    /**
      * @return array
      */
     public function getRoutes()
     {
         return $this->routes;
-    }
-
-    /**
-     * @param array $routes
-     * @return $this
-     */
-    public function setRoutes($routes)
-    {
-        $this->routes = $routes;
-        return $this;
     }
 }

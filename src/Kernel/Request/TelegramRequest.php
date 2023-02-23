@@ -3,7 +3,6 @@
 namespace Turkishjoe\TelegramEngine\Kernel\Request;
 
 use Turkishjoe\TelegramEngine\Exception\TelegramMessageTypeException;
-use Turkishjoe\TelegramEngine\Kernel\BotMetadata;
 use Turkishjoe\TelegramEngine\Model\TelegramMessageType;
 use Turkishjoe\TelegramEngine\Model\TelegramUserInterface;
 
@@ -19,12 +18,20 @@ class TelegramRequest
     private TelegramUserInterface $user;
     private array $messageData;
 
+    /**
+     * TODO: message data to object
+     * @param TelegramUserInterface $user
+     * @param array                 $messageData
+     * @param array|null            $callbackData
+     */
     public function __construct(
         TelegramUserInterface $user,
         array $messageData,
         ?array $callbackData
     ){
-
+        $this->user = $user;
+        $this->messageData = $messageData;
+        $this->callbackData = $callbackData;
     }
 
     public function getCallbackData(): array
@@ -32,20 +39,13 @@ class TelegramRequest
         return $this->callbackData;
     }
 
-    public function setCallbackData(array $callbackData): self
-    {
-        $this->callbackData = $callbackData;
-        return $this;
-    }
-
     /**
      * @return string
      */
     public function getText(): string
     {
-        return $this->data['message']['text'] ?? '';
+        return $this->messageData['message']['text'] ?? '';
     }
-
 
     /**
      * TODO: support all types
@@ -56,7 +56,7 @@ class TelegramRequest
     public function getType(): string
     {
         foreach (self::TELEGRAM_TYPES_MAPPING as $telegramKey => $telegramMessageType){
-            if(array_key_exists($telegramKey,$this->data['message']))
+            if(array_key_exists($telegramKey,$this->messageData['message']))
             {
                 return $telegramMessageType;
             }
@@ -71,33 +71,8 @@ class TelegramRequest
         return $this->user;
     }
 
-    public function setUser(TelegramUserInterface $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getData(): array
     {
-        return $this->data;
-    }
-
-    public function setData(array $data)
-    {
-        $this->data = $data;
-        return $this;
-    }
-
-    public function getBot()
-    {
-        return $this->bot;
-    }
-
-    public function setBot(BotMetadata $bot)
-    {
-        $this->bot = $bot;
-
-        return $this;
+        return $this->messageData;
     }
 }

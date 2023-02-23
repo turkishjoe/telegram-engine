@@ -13,6 +13,10 @@ class ArrayRouterCreator
      */
     private $defaultAction = 'handle';
 
+    public function __construct(){
+
+    }
+
     public function create(array $config = []): array{
         $routes = [];
 

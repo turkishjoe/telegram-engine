@@ -8,21 +8,11 @@ use Turkishjoe\TelegramEngine\Kernel\UserManagerInterface;
 
 class TelegramRequestBuilder
 {
-    /**
-     * @var UserManagerInterface $userManager
-     */
     private UserManagerInterface $userManager;
 
-    /**
-     * @var RouteResolver
-     */
-    private RouteResolver $routeResolver;
-
-
-    public function __construct(UserManagerInterface $userManager,  RouteResolver $routeResolver)
+    public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
-        $this->routeResolver = $routeResolver;
     }
 
     public function build(array $telegramData, BotMetadata $botMetadata): TelegramRequest{

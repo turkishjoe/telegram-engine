@@ -4,6 +4,8 @@ namespace Turkishjoe\TelegramEngine\Model;
 
 interface TelegramUserInterface
 {
+    const DEFAULT = 0;
+
     const STATUS_NEW = 0;
     const STATUS_APPROVED = 1;
     const STATUS_DECLINED = 2;
@@ -19,6 +21,9 @@ interface TelegramUserInterface
     public function getState();
     public function setState($state);
 
-    public function getStatus();
     public function setStatus($status);
+    public function getStatus();
+
+    //TODO:
+    public function getStoredAction(): ?array;
 }

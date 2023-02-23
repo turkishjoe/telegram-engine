@@ -3,19 +3,19 @@
 namespace Turkishjoe\TelegramEngine\Kernel;
 
 use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequestBuilder;
-use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequestRunner;
+use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequestRunnerInterface;
 use Turkishjoe\TelegramEngine\Kernel\Route\RouteResolver;
 use Turkishjoe\TelegramEngine\Kernel\Updates\UpdateObserverInterface;
 
 class TelegramEntryPoint
 {
     private UpdateObserverInterface $updateObserverInterface;
-    private TelegramRequestRunner $telegramRequestRunner;
+    private TelegramRequestRunnerInterface $telegramRequestRunner;
     private TelegramRequestBuilder $telegramRequestBuilder;
     private RouteResolver $routeResolver;
 
     public function __construct(
-        TelegramRequestRunner $telegramRequestRunner,
+        TelegramRequestRunnerInterface $telegramRequestRunner,
         TelegramRequestBuilder $telegramRequestBuilder,
         UpdateObserverInterface $updateObserverInterface,
         RouteResolver $routeResolver
