@@ -2,12 +2,11 @@
 
 namespace Turkishjoe\TelegramEngine;
 
-use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequestBuilder;
-use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequestRunnerInterface;
-use Turkishjoe\TelegramEngine\Kernel\Route\RouteResolver;
-use Turkishjoe\TelegramEngine\Kernel\Storage\UpdateStorageInterface;
-use Turkishjoe\TelegramEngine\Kernel\Storage\UserManagerInterface;
-use Turkishjoe\TelegramEngine\Model\TelegramUser;
+use Turkishjoe\TelegramEngine\Request\TelegramRequestBuilder;
+use Turkishjoe\TelegramEngine\Request\TelegramRequestRunnerInterface;
+use Turkishjoe\TelegramEngine\Route\Creator\RouteCollectionCreator;
+use Turkishjoe\TelegramEngine\Route\RouteResolver;
+use Turkishjoe\TelegramEngine\Storage\UpdateStorageInterface;
 use Turkishjoe\TelegramEngine\Model\Update;
 
 class TelegramRunner
@@ -16,20 +15,23 @@ class TelegramRunner
     private TelegramRequestRunnerInterface $telegramRequestRunner;
     private TelegramRequestBuilder $telegramRequestBuilder;
     private RouteResolver $routeResolver;
-    private UserManagerInterface $userManager;
+    private UserManager $userManager;
+    private RouteCollectionCreator $routeCollectionCreator;
 
     public function __construct(
         TelegramRequestRunnerInterface $telegramRequestRunner,
         TelegramRequestBuilder $telegramRequestBuilder,
         UpdateStorageInterface $updateStorageInterface,
         RouteResolver $routeResolver,
-        UserManagerInterface $userManager
+        RouteCollectionCreator $routeCollectionCreator,
+        UserManager $userManager
     ) {
         $this->telegramRequestRunner = $telegramRequestRunner;
         $this->updateStorageInterface = $updateStorageInterface;
         $this->telegramRequestBuilder = $telegramRequestBuilder;
         $this->routeResolver = $routeResolver;
         $this->userManager = $userManager;
+        $this->routeCollectionCreator = $routeCollectionCreator;
     }
 
     /**
@@ -53,14 +55,15 @@ class TelegramRunner
 
 
         try {
-            $user = new TelegramUser($telegramUpdateData['message']['chat']);
-            $this->userManager->store($user);
-
+            $user = $this->userManager->buildTelegramUserObject($telegramUpdateData);
             $telegramRequest = $this->telegramRequestBuilder->build($user, $telegramUpdateData);
 
             $result = $this->telegramRequestRunner->call(
                 $telegramRequest,
-                $this->routeResolver->resolve($telegramRequest),
+                $this->routeResolver->resolve(
+                    $telegramRequest,
+                    $this->routeCollectionCreator->create()
+                ),
                 []
             );
 

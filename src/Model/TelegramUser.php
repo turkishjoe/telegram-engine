@@ -4,19 +4,27 @@ namespace Turkishjoe\TelegramEngine\Model;
 
 class TelegramUser
 {
-    private string $chatId;
-    private string $username;
+    private TelegramUserChatData $telegramUserData;
+    private UserStateData $userStateData;
 
-    public function __construct(array $telegramChatData){
-        $this->chatId = $telegramChatData['id'];
-        $this->username = $telegramChatData['username'] ?? '';
+    public function __construct(UserStateData $userStateData, TelegramUserChatData $telegramUserData){
+        $this->userStateData = $userStateData;
+        $this->telegramUserData = $telegramUserData;
     }
 
-    public function getChatId(){
-        return $this->chatId;
+    /**
+     * @return TelegramUserChatData
+     */
+    public function getTelegramUserData(): TelegramUserChatData
+    {
+        return $this->telegramUserData;
     }
 
-    public function getUsername(){
-        return $this->username;
+    /**
+     * @return UserStateData
+     */
+    public function getUserStateData(): UserStateData
+    {
+        return $this->userStateData;
     }
 }

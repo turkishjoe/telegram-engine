@@ -1,11 +1,11 @@
 <?php
 
-namespace Turkishjoe\TelegramEngine\Kernel\Route\Creator;
+namespace Turkishjoe\TelegramEngine\Route\Creator;
 
-use Turkishjoe\TelegramEngine\Kernel\Route\Action;
-use Turkishjoe\TelegramEngine\Kernel\Route\Route;
+use Turkishjoe\TelegramEngine\Route\Action;
+use Turkishjoe\TelegramEngine\Route\Route;
 
-class ArrayRouterCreator
+class ArrayRouterCreator implements RouteCollectionCreator
 {
     /**
      * Для обратной совместимости со старыми роутами
@@ -13,14 +13,19 @@ class ArrayRouterCreator
      */
     private $defaultAction = 'handle';
 
-    public function __construct(){
+    private array $routeConfig;
 
+    public function __construct(array $config = []){
+        $this->routeConfig = $config;
     }
 
-    public function create(array $config = []): array{
+    /**
+     * @return Action[]
+     */
+    public function create(): array{
         $routes = [];
 
-        foreach ($config as $key=>$value){
+        foreach ($this->routeConfig as $key=>$value){
             $route = new Route();
             $action = new Action();
 

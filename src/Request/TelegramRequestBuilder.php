@@ -1,6 +1,6 @@
 <?php
 
-namespace Turkishjoe\TelegramEngine\Kernel\Request;
+namespace Turkishjoe\TelegramEngine\Request;
 
 use Turkishjoe\TelegramEngine\Model\TelegramUser;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Turkishjoe\TelegramEngine\Kernel\Route;
+namespace Turkishjoe\TelegramEngine\Route;
 
 class Action
 {
