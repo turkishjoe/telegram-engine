@@ -4,7 +4,7 @@ namespace Turkishjoe\TelegramEngine\Kernel\Request;
 
 use Turkishjoe\TelegramEngine\Exception\TelegramMessageTypeException;
 use Turkishjoe\TelegramEngine\Model\TelegramMessageType;
-use Turkishjoe\TelegramEngine\Model\TelegramUserInterface;
+use Turkishjoe\TelegramEngine\Model\TelegramUser;
 
 class TelegramRequest
 {
@@ -15,17 +15,17 @@ class TelegramRequest
     ];
 
     private ?array $callbackData;
-    private TelegramUserInterface $user;
+    private TelegramUser $user;
     private array $messageData;
 
     /**
      * TODO: message data to object
-     * @param TelegramUserInterface $user
-     * @param array                 $messageData
-     * @param array|null            $callbackData
+     * @param TelegramUser $user
+     * @param array        $messageData
+     * @param array|null   $callbackData
      */
     public function __construct(
-        TelegramUserInterface $user,
+        TelegramUser $user,
         array $messageData,
         ?array $callbackData
     ){
@@ -66,7 +66,7 @@ class TelegramRequest
     }
 
 
-    public function getUser(): TelegramUserInterface
+    public function getUser(): TelegramUser
     {
         return $this->user;
     }

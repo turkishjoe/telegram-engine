@@ -3,7 +3,7 @@
 namespace Turkishjoe\TelegramEngine\Kernel\Route;
 
 use Turkishjoe\TelegramEngine\Kernel\Request\TelegramRequest;
-use Turkishjoe\TelegramEngine\Model\TelegramUserInterface;
+use Turkishjoe\TelegramEngine\Model\TelegramUser;
 
 class RouteResolver
 {
@@ -26,7 +26,7 @@ class RouteResolver
             ?? $defaultAction;
 
 
-        if(empty($telegramData['data']['action']) && empty($state) && $telegramRequest->getUser()->getState() != TelegramUserInterface::DEFAULT){
+        if(empty($telegramData['data']['action']) && empty($state) && $telegramRequest->getUser()->getState() != TelegramUser::DEFAULT){
             $text = $telegramRequest->getUser()->getState();
         }
 
