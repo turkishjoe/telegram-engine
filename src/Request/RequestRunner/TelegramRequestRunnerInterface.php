@@ -1,7 +1,8 @@
 <?php
 
-namespace Turkishjoe\TelegramEngine\Request;
+namespace Turkishjoe\TelegramEngine\Request\RequestRunner;
 
+use Turkishjoe\TelegramEngine\Request\TelegramRequest;
 use Turkishjoe\TelegramEngine\Route\Route;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Turkishjoe\TelegramEngine\Storage;
+namespace Turkishjoe\TelegramEngine\Storage\User;
 
 use Turkishjoe\TelegramEngine\Model\TelegramUser;
 use Turkishjoe\TelegramEngine\Model\TelegramUserChatData;

@@ -3,10 +3,10 @@
 namespace Turkishjoe\TelegramEngine;
 
 use Turkishjoe\TelegramEngine\Request\TelegramRequestBuilder;
-use Turkishjoe\TelegramEngine\Request\TelegramRequestRunnerInterface;
+use Turkishjoe\TelegramEngine\Request\RequestRunner\TelegramRequestRunnerInterface;
 use Turkishjoe\TelegramEngine\Route\Creator\RouteCollectionCreator;
 use Turkishjoe\TelegramEngine\Route\RouteResolver;
-use Turkishjoe\TelegramEngine\Storage\UpdateStorageInterface;
+use Turkishjoe\TelegramEngine\Storage\Update\UpdateStorageInterface;
 use Turkishjoe\TelegramEngine\Model\Update;
 
 class TelegramRunner

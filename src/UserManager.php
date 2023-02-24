@@ -4,7 +4,7 @@ namespace Turkishjoe\TelegramEngine;
 
 use Turkishjoe\TelegramEngine\Model\TelegramUser;
 use Turkishjoe\TelegramEngine\Model\TelegramUserChatData;
-use Turkishjoe\TelegramEngine\Storage\UserStorageInterface;
+use Turkishjoe\TelegramEngine\Storage\User\UserStorageInterface;
 
 class UserManager
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Turkishjoe\TelegramEngine\Storage;
+namespace Turkishjoe\TelegramEngine\Storage\Update;
 
 use Turkishjoe\TelegramEngine\Model\Update;
 
