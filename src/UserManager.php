@@ -14,10 +14,10 @@ class UserManager
         $this->userStorage = $userStorage;
     }
 
-    public function buildTelegramUserObject(array $telegramUpdateData): TelegramUser{
+    public function buildTelegramUserObject(array $telegramUpdateData, ?string $botAlias): TelegramUser{
         $telegramUserChatData = new TelegramUserChatData($telegramUpdateData['message']['chat']);
-        $stateData = $this->userStorage->syncWithStorage($telegramUserChatData);
+        $stateData = $this->userStorage->syncWithStorage($telegramUserChatData, $botAlias);
 
-        return new TelegramUser($stateData, $telegramUserChatData);
+        return new TelegramUser($stateData, $telegramUserChatData, $botAlias);
     }
 }

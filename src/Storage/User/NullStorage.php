@@ -8,7 +8,7 @@ use Turkishjoe\TelegramEngine\Storage\User\UserStorageInterface;
 
 class NullStorage implements UserStorageInterface
 {
-    public function syncWithStorage(TelegramUserChatData $telegramUser): UserStateData
+    public function syncWithStorage(TelegramUserChatData $telegramUser, ?string $botAlias): UserStateData
     {
         return new UserStateData();
     }

@@ -6,12 +6,10 @@ class TelegramUserChatData
 {
     private string $chatId;
     private string $username;
-    private string $class;
 
-    public function __construct(array $telegramChatData, string $class){
+    public function __construct(array $telegramChatData){
         $this->chatId = $telegramChatData['id'];
         $this->username = $telegramChatData['username'] ?? '';
-        $this->class = $class;
     }
 
     public function getChatId(){
@@ -20,13 +18,5 @@ class TelegramUserChatData
 
     public function getUsername(){
         return $this->username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClass(): string
-    {
-        return $this->class;
     }
 }

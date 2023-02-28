@@ -55,8 +55,8 @@ class TelegramRunner
 
 
         try {
-            $user = $this->userManager->buildTelegramUserObject($telegramUpdateData);
-            $telegramRequest = $this->telegramRequestBuilder->build($user, $telegramUpdateData, $botAlias);
+            $user = $this->userManager->buildTelegramUserObject($telegramUpdateData, $botAlias);
+            $telegramRequest = $this->telegramRequestBuilder->build($user, $telegramUpdateData);
 
             $result = $this->telegramRequestRunner->call(
                 $telegramRequest,

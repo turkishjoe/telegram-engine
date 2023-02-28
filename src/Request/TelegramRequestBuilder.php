@@ -21,15 +21,14 @@ class TelegramRequestBuilder
      *     .....
      * )
      */
-    public function build(TelegramUser $user, array $rawTelegramData, ?string $botAlias = null): TelegramRequest{
+    public function build(TelegramUser $user, array $rawTelegramData): TelegramRequest{
         $telegramData = empty($rawTelegramData['message']) ? $rawTelegramData['callback_query'] : $rawTelegramData;
         $callbackData = $this->castCallbackData($telegramData);
 
         return new TelegramRequest(
             $user,
             $telegramData,
-            $callbackData,
-            $botAlias
+            $callbackData
         );
     }
 
