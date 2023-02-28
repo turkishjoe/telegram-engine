@@ -32,7 +32,7 @@ class TelegramRequestBuilder
         );
     }
 
-    private function castCallbackData(array $telegramData): array{
+    private function castCallbackData(array $telegramData): ?array{
         $callbackData = null;
 
         if (!empty($telegramData['data'])) {
