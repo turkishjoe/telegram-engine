@@ -43,7 +43,7 @@ class TelegramRunner
      *
      * @throws \Throwable
      */
-    public function handler(array $telegramUpdateData)
+    public function handler(array $telegramUpdateData, ?string $botAlias = null)
     {
         $update = new Update((string)$telegramUpdateData['update_id']);
 
@@ -56,7 +56,7 @@ class TelegramRunner
 
         try {
             $user = $this->userManager->buildTelegramUserObject($telegramUpdateData);
-            $telegramRequest = $this->telegramRequestBuilder->build($user, $telegramUpdateData);
+            $telegramRequest = $this->telegramRequestBuilder->build($user, $telegramUpdateData, $botAlias);
 
             $result = $this->telegramRequestRunner->call(
                 $telegramRequest,

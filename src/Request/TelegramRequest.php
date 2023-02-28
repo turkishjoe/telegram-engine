@@ -17,6 +17,7 @@ class TelegramRequest
     private ?array $callbackData;
     private TelegramUser $user;
     private array $messageData;
+    private ?string $botAlias;
 
     /**
      * TODO: message data to object
@@ -27,11 +28,13 @@ class TelegramRequest
     public function __construct(
         TelegramUser $user,
         array $messageData,
-        ?array $callbackData
+        ?array $callbackData,
+        ?string $botAlias = null
     ){
         $this->user = $user;
         $this->messageData = $messageData;
         $this->callbackData = $callbackData;
+        $this->botAlias = $botAlias;
     }
 
     public function getCallbackData(): array
@@ -74,5 +77,13 @@ class TelegramRequest
     public function getData(): array
     {
         return $this->messageData;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBotAlias(): ?string
+    {
+        return $this->botAlias;
     }
 }
