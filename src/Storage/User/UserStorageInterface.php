@@ -9,4 +9,5 @@ use Turkishjoe\TelegramEngine\Model\UserStateData;
 interface UserStorageInterface
 {
     public function syncWithStorage(TelegramUserChatData $telegramUser, ?string $botAlias): UserStateData;
+    public function storeUser(TelegramUser $userStateData);
 }

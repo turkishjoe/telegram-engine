@@ -5,7 +5,10 @@ namespace Turkishjoe\TelegramEngine\Route\Creator;
 use Turkishjoe\TelegramEngine\Route\Action;
 use Turkishjoe\TelegramEngine\Route\Route;
 
-class ArrayRouterCreator implements RouteCollectionCreator
+/**
+ * Утлита для RouteResolver
+ */
+class ArrayRouterCreator
 {
     /**
      * Для обратной совместимости со старыми роутами

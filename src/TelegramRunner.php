@@ -16,14 +16,12 @@ class TelegramRunner
     private TelegramRequestBuilder $telegramRequestBuilder;
     private RouteResolver $routeResolver;
     private UserManager $userManager;
-    private RouteCollectionCreator $routeCollectionCreator;
 
     public function __construct(
         TelegramRequestRunnerInterface $telegramRequestRunner,
         TelegramRequestBuilder $telegramRequestBuilder,
         UpdateStorageInterface $updateStorageInterface,
         RouteResolver $routeResolver,
-        RouteCollectionCreator $routeCollectionCreator,
         UserManager $userManager
     ) {
         $this->telegramRequestRunner = $telegramRequestRunner;
@@ -31,7 +29,6 @@ class TelegramRunner
         $this->telegramRequestBuilder = $telegramRequestBuilder;
         $this->routeResolver = $routeResolver;
         $this->userManager = $userManager;
-        $this->routeCollectionCreator = $routeCollectionCreator;
     }
 
     /**
@@ -61,8 +58,7 @@ class TelegramRunner
             $result = $this->telegramRequestRunner->call(
                 $telegramRequest,
                 $this->routeResolver->resolve(
-                    $telegramRequest,
-                    $this->routeCollectionCreator->create()
+                    $telegramRequest
                 ),
                 []
             );
