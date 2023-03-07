@@ -12,11 +12,11 @@ class TelegramUserChatData
         $this->username = $telegramChatData['username'] ?? '';
     }
 
-    public function getChatId(){
+    public function getChatId(): string{
         return $this->chatId;
     }
 
-    public function getUsername(){
+    public function getUsername(): string{
         return $this->username;
     }
 }

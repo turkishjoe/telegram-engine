@@ -70,6 +70,12 @@ class TelegramRequest
     {
         return $this->user;
     }
+    
+    public function getChatId(): string{
+        return $this->getUser()
+            ->getTelegramUserData()
+            ->getChatId();
+    }
 
     public function getData(): array
     {
