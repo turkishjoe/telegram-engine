@@ -2,10 +2,17 @@
 
 namespace Turkishjoe\TelegramEngine\Request;
 
+use Turkishjoe\TelegramEngine\CallbackDataTransformerInterface;
 use Turkishjoe\TelegramEngine\Model\TelegramUser;
 
 class TelegramRequestBuilder
 {
+    private CallbackDataTransformerInterface $callbackDataTransformer;
+
+    public function __construct(CallbackDataTransformerInterface $callbackDataTransformer){
+        $this->callbackDataTransformer = $callbackDataTransformer;
+    }
+
     /**
      * TODO: Maybe we have lib with telegramRequest object
      * TODO: In production we have more events, for example chat_invite_link and each other
@@ -36,7 +43,7 @@ class TelegramRequestBuilder
         $callbackData = null;
 
         if (!empty($telegramData['data'])) {
-            $callbackData = json_decode($telegramData['data'], true) ?? [];
+            $callbackData = $this->callbackDataTransformer->deserialize($telegramData['data']);
         }
 
         return $callbackData;
