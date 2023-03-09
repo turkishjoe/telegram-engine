@@ -39,7 +39,7 @@ class TelegramRunner
 
 
         try {
-            $result = $this->requestProcessor->
+            $result = $this->requestProcessor->process($telegramUpdateData, $botAlias);
             /**
              * TODO: Change to event/subscribe
              */
