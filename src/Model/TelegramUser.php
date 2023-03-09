@@ -5,10 +5,10 @@ namespace Turkishjoe\TelegramEngine\Model;
 class TelegramUser
 {
     private TelegramUserChatData $telegramUserData;
-    private UserStateData $userStateData;
+    private UserStorageDataInterface $userStateData;
     private ?string $botAlias;
 
-    public function __construct(UserStateData $userStateData, TelegramUserChatData $telegramUserData, ?string $botAlias){
+    public function __construct(UserStorageDataInterface $userStateData, TelegramUserChatData $telegramUserData, ?string $botAlias){
         $this->userStateData = $userStateData;
         $this->telegramUserData = $telegramUserData;
         $this->botAlias = $botAlias;
@@ -23,9 +23,9 @@ class TelegramUser
     }
 
     /**
-     * @return UserStateData
+     * @return UserStorageDataInterface
      */
-    public function getUserStateData(): UserStateData
+    public function getUserStateData(): UserStorageDataInterface
     {
         return $this->userStateData;
     }

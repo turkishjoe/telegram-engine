@@ -2,7 +2,7 @@
 
 namespace Turkishjoe\TelegramEngine\Route;
 
-use Turkishjoe\TelegramEngine\Model\UserStateData;
+use Turkishjoe\TelegramEngine\Model\UserStorageDataInterface;
 use Turkishjoe\TelegramEngine\Request\TelegramRequest;
 use Turkishjoe\TelegramEngine\Model\TelegramUser;
 
@@ -44,7 +44,7 @@ class RouteResolver implements RouteResolverInterface
 
 
         $state = $telegramRequest->getUser()->getUserStateData()->getState();
-        if(empty($telegramData['data']['action']) && empty($state) && $state !== UserStateData::DEFAULT_STATE){
+        if(empty($telegramData['data']['action']) && empty($state) && $state !== UserStorageDataInterface::DEFAULT_STATE){
             $text = $state;
         }
 
