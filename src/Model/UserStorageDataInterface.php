@@ -13,6 +13,10 @@ interface UserStorageDataInterface
      * Не придумал как сделать лучше, здесь может быть как
      * и ларовская модель, так и нет. Может лучше разделить интрефейсы,
      * но пока так
+     *
+     * @template T
+     *
+     * @return T
      */
     public function getUserData();
 }
