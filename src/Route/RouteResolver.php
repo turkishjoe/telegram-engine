@@ -52,9 +52,9 @@ class RouteResolver implements RouteResolverInterface
          * TODO: defaultAction exists
          */
         if(empty($routeConfiguration[$text])){
-            return $routeConfiguration[$defaultAction];
+            return $this->routeConfiguration[$defaultAction];
         }
 
-        return $routeConfiguration[$text];
+        return $this->routeConfiguration[$text];
     }
 }
