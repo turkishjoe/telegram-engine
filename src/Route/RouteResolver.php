@@ -29,8 +29,8 @@ class RouteResolver implements RouteResolverInterface
         /**
          * Команды /help, /start обрабатываем в первую очередь
          */
-        if(!empty($telegramData['message']['text']) && !empty($routeConfiguration[$telegramData['message']['text']])){
-            return $routeConfiguration[$telegramData['message']['text']];
+        if(!empty($telegramData['message']['text']) && !empty($this->routeConfiguration[$telegramData['message']['text']])){
+            return $this->routeConfiguration[$telegramData['message']['text']];
         }
 
         /**
