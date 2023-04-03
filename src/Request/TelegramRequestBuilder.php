@@ -2,7 +2,7 @@
 
 namespace Turkishjoe\TelegramEngine\Request;
 
-use Turkishjoe\TelegramEngine\CallbackDataTransformerInterface;
+use Turkishjoe\TelegramEngine\Callback\CallbackDataTransformerInterface;
 use Turkishjoe\TelegramEngine\Model\TelegramUser;
 
 class TelegramRequestBuilder
