@@ -1,6 +1,6 @@
 <?php
 
-namespace Turkishjoe\TelegramEngine;
+namespace Turkishjoe\TelegramEngine\Callback;
 
 class JsonCallbackDataTransformer implements CallbackDataTransformerInterface
 {

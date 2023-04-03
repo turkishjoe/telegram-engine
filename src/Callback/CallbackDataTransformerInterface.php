@@ -1,6 +1,6 @@
 <?php
 
-namespace Turkishjoe\TelegramEngine;
+namespace Turkishjoe\TelegramEngine\Callback;
 
 /**
  * Пока используется json, но из-за того что callbackData можно только
