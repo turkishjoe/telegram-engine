@@ -5,6 +5,7 @@ namespace Turkishjoe\TelegramEngine;
 use Turkishjoe\TelegramEngine\Request\TelegramRequestBuilder;
 use Turkishjoe\TelegramEngine\Request\RequestRunner\TelegramRequestRunnerInterface;
 use Turkishjoe\TelegramEngine\Route\RouteResolver;
+use Turkishjoe\TelegramEngine\Route\RouteResolverInterface;
 use Turkishjoe\TelegramEngine\Storage\Update\UpdateStorageInterface;
 use Turkishjoe\TelegramEngine\Model\Update;
 
@@ -13,14 +14,14 @@ class TelegramRunner
     private UpdateStorageInterface $updateStorageInterface;
     private TelegramRequestRunnerInterface $telegramRequestRunner;
     private TelegramRequestBuilder $telegramRequestBuilder;
-    private RouteResolver $routeResolver;
+    private RouteResolverInterface $routeResolver;
     private UserManager $userManager;
 
     public function __construct(
         TelegramRequestRunnerInterface $telegramRequestRunner,
         TelegramRequestBuilder $telegramRequestBuilder,
         UpdateStorageInterface $updateStorageInterface,
-        RouteResolver $routeResolver,
+        RouteResolverInterface $routeResolver,
         UserManager $userManager
     ) {
         $this->telegramRequestRunner = $telegramRequestRunner;
@@ -57,7 +58,8 @@ class TelegramRunner
             $result = $this->telegramRequestRunner->call(
                 $telegramRequest,
                 $this->routeResolver->resolve(
-                    $telegramRequest
+                    $telegramRequest,
+                    '/start'
                 ),
                 []
             );

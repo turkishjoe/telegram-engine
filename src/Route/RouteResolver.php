@@ -23,7 +23,7 @@ class RouteResolver implements RouteResolverInterface
      * @param string          $defaultAction
      * @return Route
      */
-    public function resolve(TelegramRequest $telegramRequest, string $defaultAction = '/start'): Route{
+    public function resolve(TelegramRequest $telegramRequest, string $defaultAction = '/start') {
         $telegramData = $telegramRequest->getData();
 
         /**

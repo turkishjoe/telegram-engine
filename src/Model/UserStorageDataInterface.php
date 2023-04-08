@@ -6,7 +6,7 @@ interface UserStorageDataInterface
 {
     const DEFAULT_STATE = 0;
 
-    public function getState(): int;
+    public function getState(): ?int;
     public function getStateParams(): array;
 
     /**
